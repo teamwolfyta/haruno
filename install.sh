@@ -6,7 +6,7 @@ commands=("git" "jq")
 for cmd in "${commands[@]}"; do
   command -v "$cmd" &>/dev/null || {
     echo "Error: $cmd is not installed."
-    exec /usr/bin/env -S nix shell nixpkgs#bash nixpkgs#curl nixpkgs#git nixpkgs#jq --command bash "$0" "$@"
+    exec /usr/bin/env -S nix --extra-experimental-features "nix-command" shell nixpkgs#bash nixpkgs#curl nixpkgs#git nixpkgs#jq --command bash "$0" "$@"
   }
 done
 
