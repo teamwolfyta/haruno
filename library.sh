@@ -17,60 +17,6 @@ parse_common_arguments() {
   done
 }
 
-prompt_for_access_token() {
-  local client_id="Iv23li2pI9tfnqmfLKDZ"
-  local response device_code user_code verification_uri access_token username
-  local interval=5 expires_in start_time
-
-  response=$(curl -s -X POST "https://github.com/login/device/code" \
-    -H "Accept: application/json" \
-    -d "client_id=$client_id&scope=repo")
-
-  device_code=$(echo "$response" | jq -r '.device_code')
-  user_code=$(echo "$response" | jq -r '.user_code')
-  verification_uri=$(echo "$response" | jq -r '.verification_uri')
-  interval=$(echo "$response" | jq -r '.interval // 5')
-  expires_in=$(echo "$response" | jq -r '.expires_in')
-
-  echo "Please visit: $verification_uri" >&2
-  echo "And enter the code: $user_code" >&2
-  echo "This code will expire in $expires_in seconds." >&2
-
-  start_time=$(date +%s)
-  while true; do
-    sleep "$interval"
-    response=$(curl -s -X POST "https://github.com/login/oauth/access_token" \
-      -H "Accept: application/json" \
-      -d "client_id=$client_id&device_code=$device_code&grant_type=urn:ietf:params:oauth:grant-type:device_code")
-
-    access_token=$(echo "$response" | jq -r '.access_token | select(.!=null)')
-    [[ -n $access_token ]] && {
-      echo "DEBUG: Access token received" >&2
-      break
-    }
-
-    error=$(echo "$response" | jq -r '.error | select(.!=null)')
-    if [[ -n $error && $error != "authorization_pending" ]]; then
-      echo "Error: $error" >&2
-      exit 1
-    fi
-
-    if (($(date +%s) - start_time >= expires_in)); then
-      echo "Authentication timed out. Restarting the process..." >&2
-      return $(prompt_for_access_token)
-    fi
-  done
-
-  username=$(curl -s -H "Authorization: token $access_token" https://api.github.com/user | jq -r .login)
-
-  [[ -z $username ]] && {
-    echo "Failed to retrieve username." >&2
-    exit 1
-  }
-
-  echo "$username $access_token"
-}
-
 print_banner() {
   clear
   cat <<'EOF'
@@ -143,6 +89,60 @@ prompt_choice_from_list() {
       echo "Invalid selection. Please try again." >&2
     fi
   done
+}
+
+prompt_for_access_token() {
+  local client_id="Iv23li2pI9tfnqmfLKDZ"
+  local response device_code user_code verification_uri access_token username
+  local interval=5 expires_in start_time
+
+  response=$(curl -s -X POST "https://github.com/login/device/code" \
+    -H "Accept: application/json" \
+    -d "client_id=$client_id&scope=repo")
+
+  device_code=$(echo "$response" | jq -r '.device_code')
+  user_code=$(echo "$response" | jq -r '.user_code')
+  verification_uri=$(echo "$response" | jq -r '.verification_uri')
+  interval=$(echo "$response" | jq -r '.interval // 5')
+  expires_in=$(echo "$response" | jq -r '.expires_in')
+
+  echo "Please visit: $verification_uri" >&2
+  echo "And enter the code: $user_code" >&2
+  echo "This code will expire in $expires_in seconds." >&2
+
+  start_time=$(date +%s)
+  while true; do
+    sleep "$interval"
+    response=$(curl -s -X POST "https://github.com/login/oauth/access_token" \
+      -H "Accept: application/json" \
+      -d "client_id=$client_id&device_code=$device_code&grant_type=urn:ietf:params:oauth:grant-type:device_code")
+
+    access_token=$(echo "$response" | jq -r '.access_token | select(.!=null)')
+    [[ -n $access_token ]] && {
+      echo "DEBUG: Access token received" >&2
+      break
+    }
+
+    error=$(echo "$response" | jq -r '.error | select(.!=null)')
+    if [[ -n $error && $error != "authorization_pending" ]]; then
+      echo "Error: $error" >&2
+      exit 1
+    fi
+
+    if (($(date +%s) - start_time >= expires_in)); then
+      echo "Authentication timed out. Restarting the process..." >&2
+      return $(prompt_for_access_token)
+    fi
+  done
+
+  username=$(curl -s -H "Authorization: token $access_token" https://api.github.com/user | jq -r .login)
+
+  [[ -z $username ]] && {
+    echo "Failed to retrieve username." >&2
+    exit 1
+  }
+
+  echo "$username $access_token"
 }
 
 prompt_drive_choice() {
