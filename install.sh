@@ -134,6 +134,16 @@ print_banner
 print_separator
 echo
 
+NIX_CONFIG=""
+
+if prompt_for_yes_or_no "Would you like to login via GitHub?"; then
+  echo
+  read -r username access_token < <(prompt_for_access_token)
+  NIX_CONFIG="extra-access-tokens = github.com=$access_token"
+  echo "Info: Logged in as GitHub user: $username"
+fi
+echo
+
 read -rp "Enter flake URL (default: github:TeamWolfyta/Yukino): " REPOSITORY
 REPOSITORY="${REPOSITORY:-github:TeamWolfyta/Yukino}"
 echo
@@ -143,16 +153,6 @@ GIT_REF="${GIT_REF:-main}"
 echo
 
 HOST=$(if [[ "$REPOSITORY" == "github:TeamWolfyta/Yukino" ]]; then prompt_for_choice_from_list "Which host to install?" "${YUKINO_HOSTS[@]}"; else read -rp "Which host to install: "; fi)
-echo
-
-NIX_CONFIG=""
-
-if prompt_for_yes_or_no "Would you like to login via GitHub?"; then
-  echo
-  read -r username access_token < <(prompt_for_access_token)
-  NIX_CONFIG="extra-access-tokens = github.com=$access_token"
-  echo "Info: Logged in as GitHub user: $username"
-fi
 echo
 
 print_banner
