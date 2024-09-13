@@ -2,6 +2,11 @@
 
 set -o errexit -o nounset -o pipefail
 
+if ! command -v jq &>/dev/null; then
+  echo "Error: jq is not installed. Re-running the script with the correct shebang."
+  exec /usr/bin/env -S nix shell nixpkgs#bash nixpkgs#curl nixpkgs#git nixpkgs#jq --command bash "$0" "$@"
+fi
+
 LOCAL_LIBRARY_PATH="$(dirname "$(realpath "$BASH_SOURCE")")/library.sh"
 REMOTE_LIBRARY_URL="https://go.wolfyta.dev/yukino/library.sh"
 
@@ -11,7 +16,7 @@ else
   TEMPORARY_FILE=$(mktemp)
   trap 'rm -f "$TEMPORARY_FILE"' EXIT
   curl -L -s "$REMOTE_LIBRARY_URL" -o "$TEMPORARY_FILE" || {
-    echo "Failed to download library from $REMOTE_LIBRARY_URL" >&2
+    echo "Error: Failed to download library from $REMOTE_LIBRARY_URL" >&2
     exit 1
   }
   source "$TEMPORARY_FILE"
@@ -46,7 +51,7 @@ EOF
 echo
 
 if ! prompt_for_yes_or_no "Do you understand and accept this?"; then
-  echo "User did not accept. Exiting."
+  echo "Error: User did not accept. Exiting."
   exit 1
 fi
 
@@ -68,7 +73,7 @@ ZFSDISK="${DISK}$(if [[ "$DISK" =~ "nvme" ]]; then echo "p1"; else echo "1"; fi)
 echo "The following partitions will be created on the disk:"
 echo -e "\nBoot Partition: $BOOTDISK\nSwap Partition: $SWAPDISK\nZFS Partition: $ZFSDISK\n"
 
-prompt_for_yes_or_no "This WILL format the disk! Are you sure?" || exit 1
+prompt_for_yes_or_no "Warning: This WILL format the disk! Are you sure?" || exit 1
 echo
 
 print_banner
@@ -78,28 +83,28 @@ echo
 echo -e "Boot Partition: $BOOTDISK\nSwap Partition: $SWAPDISK\nZFS Partition: $ZFSDISK\n"
 
 if is_in_safe_mode; then
-  echo "Safe mode is enabled. Skipping disk formatting and partitioning."
+  echo "Info: Safe mode is enabled. Skipping disk formatting and partitioning."
   sleep 5
 else
-  echo "Starting disk formatting and partitioning..."
+  echo "Info: Starting disk formatting and partitioning..."
   echo
 
   sudo blkdiscard -f "$DISK"
   sudo sgdisk --clear "$DISK"
   sudo sgdisk -n3:1M:+1G -t3:EF00 -n2:0:+16G -t2:8200 -n1:0:0 -t1:BF01 "$DISK"
 
-  echo "Notifying kernel of partition changes..."
+  echo "Info: Notifying kernel of partition changes..."
   sudo sgdisk -p "$DISK" >/dev/null
   sleep 5
 
-  echo "Setting up filesystems and swap space..."
+  echo "Info: Setting up filesystems and swap space..."
   sudo mkswap "$SWAPDISK" -L "NIXSWAP"
   sudo swapon "$SWAPDISK"
   sudo mkfs.fat -F 32 "$BOOTDISK" -n NIXBOOT
 
   sudo mount --mkdir "$BOOTDISK" /mnt/boot
 
-  echo "Creating ZFS pool and datasets..."
+  echo "Info: Creating ZFS pool and datasets..."
   sudo zpool create -f -o ashift=12 -o autotrim=on -O compression=zstd -O acltype=posixacl -O atime=off -O xattr=sa -O normalization=formD -O mountpoint=none zroot "$ZFSDISK"
 
   sudo zfs create -o mountpoint=legacy zroot/root
@@ -143,7 +148,7 @@ if prompt_for_yes_or_no "Would you like to login via GitHub?"; then
   echo
   read -r username access_token < <(prompt_for_access_token)
   NIX_CONFIG="extra-access-tokens = github.com=$access_token"
-  echo "Logged in as GitHub user: $username"
+  echo "Info: Logged in as GitHub user: $username"
 fi
 echo
 
@@ -154,14 +159,14 @@ echo
 echo -e "Repository: $REPOSITORY\nGit Ref: $GIT_REF\nHost: $HOST\nGitHub Login: ${username:-Not provided}\nPersist Snapshot: ${SNAPSHOT_PATH:-Not used}\nSafe Mode: $(is_in_safe_mode && echo "${GREEN}Enabled${RESET}" || echo "${RED}Disabled${RESET}")\n"
 
 prompt_for_yes_or_no "Are these details correct?" || {
-  echo "Aborting installation. Please run the script again with correct details."
+  echo "Error: Aborting installation. Please run the script again with correct details."
   exit 1
 }
 
-echo "Starting NixOS installation..."
+echo "Info: Starting NixOS installation..."
 echo
 if is_in_safe_mode; then
-  echo "Safe mode enabled. No actions will be executed."
+  echo "Info: Safe mode enabled. No actions will be executed."
   echo "Would run: NIX_CONFIG=\"$NIX_CONFIG\" sudo nixos-install --no-root-password --flake \"$REPOSITORY/$GIT_REF#$HOST\""
 else
   NIX_CONFIG="$NIX_CONFIG" sudo nixos-install --no-root-password --flake "$REPOSITORY/$GIT_REF#$HOST"
