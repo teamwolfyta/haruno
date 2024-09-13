@@ -47,7 +47,7 @@ EOF
 
 echo
 
-if ! prompt_yes_no "Do you understand and accept this?"; then
+if ! prompt_for_yes_or_no "Do you understand and accept this?"; then
   echo "User did not accept. Exiting."
   exit 1
 fi
@@ -57,7 +57,7 @@ print_separator
 echo
 
 DISK=${DISK:-"/dev/vda"}
-[[ ! -b "$DISK" ]] && DISK=$(prompt_drive_choice)
+[[ ! -b "$DISK" ]] && DISK=$(prompt_for_drive_choice)
 
 print_banner
 print_separator
@@ -80,7 +80,7 @@ echo "Swap Partition: $SWAPDISK"
 echo "ZFS Partition: $ZFSDISK"
 echo
 
-prompt_yes_no "This WILL format the disk! Are you sure?" || exit 1
+prompt_for_yes_or_no "This WILL format the disk! Are you sure?" || exit 1
 echo
 
 print_banner
@@ -126,7 +126,7 @@ else
   done
 
   echo
-  if prompt_yes_no "Do you want to load from a persist snapshot?"; then
+  if prompt_for_yes_or_no "Do you want to load from a persist snapshot?"; then
     echo
     SNAPSHOT_PATH=$(prompt_for_filepath "Enter the snapshot filepath:")
     sudo zfs receive -o mountpoint=legacy zroot/persist <"$SNAPSHOT_PATH"
@@ -153,7 +153,7 @@ echo
 
 NIX_CONFIG=""
 
-if prompt_yes_no "Would you like to login via GitHub?"; then
+if prompt_for_yes_or_no "Would you like to login via GitHub?"; then
   echo
   read -r username access_token < <(prompt_for_access_token)
   NIX_CONFIG="extra-access-tokens = github.com=$access_token"
@@ -174,7 +174,7 @@ echo "ZFS Root: ${ZFS_ROOT:-Not using ZFS}"
 echo "Safe Mode: $(is_in_safe_mode && echo "${GREEN}Enabled${RESET}" || echo "${RED}Disabled${RESET}")"
 echo
 
-prompt_yes_no "Are these details correct?" || {
+prompt_for_yes_or_no "Are these details correct?" || {
   echo "Aborting installation. Please run the script again with correct details."
   exit 1
 }

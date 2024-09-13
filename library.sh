@@ -43,7 +43,7 @@ print_separator() {
   printf '%*s\n' "66" '' | tr ' ' '-'
 }
 
-prompt_yes_no() {
+prompt_for_yes_or_no() {
   local msg="$1" response
   while true; do
     read -rp "$msg (y/n): " response
@@ -66,7 +66,7 @@ prompt_for_filepath() {
   done
 }
 
-prompt_choice_from_list() {
+prompt_for_choice_from_list() {
   local msg="$1"
   shift
   local options=("$@") choice
@@ -145,7 +145,7 @@ prompt_for_access_token() {
   echo "$username $access_token"
 }
 
-prompt_drive_choice() {
+prompt_for_drive_choice() {
   local drives drive_paths=() drive_descriptions=()
 
   mapfile -t drives < <(lsblk -d -n -o NAME,SIZE,TYPE | awk '{print "/dev/" $1 " - Size: " $2 " - Type: " $3}')
@@ -155,7 +155,7 @@ prompt_drive_choice() {
     drive_descriptions+=("$line")
   done
 
-  local selected_desc=$(prompt_choice_from_list "Available drives:" "${drive_descriptions[@]}")
+  local selected_desc=$(prompt_for_choice_from_list "Available drives:" "${drive_descriptions[@]}")
   local selected_drive=$(echo "$selected_desc" | awk '{print $1}')
 
   for i in "${!drive_descriptions[@]}"; do
