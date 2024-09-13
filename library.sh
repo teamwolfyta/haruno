@@ -86,7 +86,7 @@ print_banner() {
 
 EOF
 
-  local safe_mode_message=$(is_in_safe_mode && echo "${GREEN}SAFE-MODE ON${RESET}" || echo "${RED}SAFE-MODE OFF${RESET}")
+  local safe_mode_message=$(is_in_safe_mode && echo "${GREEN}SAFE-MODE ENABLED${RESET}" || echo "${RED}SAFE-MODE DISABLED${RESET}")
 
   echo "  ❄️  Yukino (雪乃), The Nix(OS) Flake that powers my system(s)."
   echo -e "     $safe_mode_message"
