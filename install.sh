@@ -10,12 +10,10 @@ if [[ -f "$LOCAL_LIBRARY_PATH" ]]; then
 else
   TEMPORARY_FILE=$(mktemp)
   trap 'rm -f "$TEMPORARY_FILE"' EXIT
-
-  if ! curl -L -s "$REMOTE_LIBRARY_URL" -o "$TEMPORARY_FILE"; then
+  curl -L -s "$REMOTE_LIBRARY_URL" -o "$TEMPORARY_FILE" || {
     echo "Failed to download library from $REMOTE_LIBRARY_URL" >&2
     exit 1
-  fi
-
+  }
   source "$TEMPORARY_FILE"
 fi
 
@@ -63,22 +61,12 @@ print_banner
 print_separator
 echo
 
-if [[ "$DISK" =~ "nvme" ]]; then
-  BOOTDISK="${DISK}p3"
-  SWAPDISK="${DISK}p2"
-  ZFSDISK="${DISK}p1"
-else
-  BOOTDISK="${DISK}3"
-  SWAPDISK="${DISK}2"
-  ZFSDISK="${DISK}1"
-fi
+BOOTDISK="${DISK}$(if [[ "$DISK" =~ "nvme" ]]; then echo "p3"; else echo "3"; fi)"
+SWAPDISK="${DISK}$(if [[ "$DISK" =~ "nvme" ]]; then echo "p2"; else echo "2"; fi)"
+ZFSDISK="${DISK}$(if [[ "$DISK" =~ "nvme" ]]; then echo "p1"; else echo "1"; fi)"
 
 echo "The following partitions will be created on the disk:"
-echo
-echo "Boot Partition: $BOOTDISK"
-echo "Swap Partition: $SWAPDISK"
-echo "ZFS Partition: $ZFSDISK"
-echo
+echo -e "\nBoot Partition: $BOOTDISK\nSwap Partition: $SWAPDISK\nZFS Partition: $ZFSDISK\n"
 
 prompt_for_yes_or_no "This WILL format the disk! Are you sure?" || exit 1
 echo
@@ -87,10 +75,7 @@ print_banner
 print_separator
 echo
 
-echo "Boot Partition: $BOOTDISK"
-echo "Swap Partition: $SWAPDISK"
-echo "ZFS Partition: $ZFSDISK"
-echo
+echo -e "Boot Partition: $BOOTDISK\nSwap Partition: $SWAPDISK\nZFS Partition: $ZFSDISK\n"
 
 if is_in_safe_mode; then
   echo "Safe mode is enabled. Skipping disk formatting and partitioning."
@@ -112,20 +97,21 @@ else
   sudo swapon "$SWAPDISK"
   sudo mkfs.fat -F 32 "$BOOTDISK" -n NIXBOOT
 
+  sudo mount --mkdir "$BOOTDISK" /mnt/boot
+
   echo "Creating ZFS pool and datasets..."
   sudo zpool create -f -o ashift=12 -o autotrim=on -O compression=zstd -O acltype=posixacl -O atime=off -O xattr=sa -O normalization=formD -O mountpoint=none zroot "$ZFSDISK"
 
   sudo zfs create -o mountpoint=legacy zroot/root
   sudo zfs snapshot zroot/root@blank
   sudo mount -t zfs zroot/root /mnt
-  sudo mount --mkdir "$BOOTDISK" /mnt/boot
 
   for dataset in nix tmp cache; do
     sudo zfs create -o mountpoint=legacy "zroot/$dataset"
     sudo mount --mkdir -t zfs "zroot/$dataset" "/mnt/$dataset"
   done
-
   echo
+
   if prompt_for_yes_or_no "Do you want to load from a persist snapshot?"; then
     echo
     SNAPSHOT_PATH=$(prompt_for_filepath "Enter the snapshot filepath:")
@@ -148,7 +134,7 @@ read -rp "Enter GitHub repository ref (default: main): " GIT_REF
 GIT_REF="${GIT_REF:-main}"
 echo
 
-[[ "$REPOSITORY" == "github:TeamWolfyta/Yukino" ]] && HOST=$(prompt_choice_from_list "Which host to install?" "${YUKINO_HOSTS[@]}") || read -rp "Which host to install: " HOST
+HOST=$(if [[ "$REPOSITORY" == "github:TeamWolfyta/Yukino" ]]; then prompt_for_choice_from_list "Which host to install?" "${YUKINO_HOSTS[@]}"; else read -rp "Which host to install: "; fi)
 echo
 
 NIX_CONFIG=""
@@ -165,20 +151,12 @@ print_banner
 print_separator
 echo
 
-echo "Repository: $REPOSITORY"
-echo "Git Ref: $GIT_REF"
-echo "Host: $HOST"
-echo "GitHub Login: ${username:-Not provided}"
-echo "ZFS Root: ${ZFS_ROOT:-Not using ZFS}"
-[[ -n "${SNAPSHOT_PATH:-}" ]] && echo "Persist Snapshot: $SNAPSHOT_PATH" || echo "Persist Snapshot: Not used"
-echo "Safe Mode: $(is_in_safe_mode && echo "${GREEN}Enabled${RESET}" || echo "${RED}Disabled${RESET}")"
-echo
+echo -e "Repository: $REPOSITORY\nGit Ref: $GIT_REF\nHost: $HOST\nGitHub Login: ${username:-Not provided}\nPersist Snapshot: ${SNAPSHOT_PATH:-Not used}\nSafe Mode: $(is_in_safe_mode && echo "${GREEN}Enabled${RESET}" || echo "${RED}Disabled${RESET}")\n"
 
 prompt_for_yes_or_no "Are these details correct?" || {
   echo "Aborting installation. Please run the script again with correct details."
   exit 1
 }
-echo
 
 echo "Starting NixOS installation..."
 echo
@@ -186,7 +164,6 @@ if is_in_safe_mode; then
   echo "Safe mode enabled. No actions will be executed."
   echo "Would run: NIX_CONFIG=\"$NIX_CONFIG\" sudo nixos-install --no-root-password --flake \"$REPOSITORY/$GIT_REF#$HOST\""
 else
-  echo "Installing NixOS..."
   NIX_CONFIG="$NIX_CONFIG" sudo nixos-install --no-root-password --flake "$REPOSITORY/$GIT_REF#$HOST"
 fi
 echo
