@@ -1,11 +1,14 @@
-#!/usr/bin/env -S nix shell nixpkgs#bash nixpkgs#curl nixpkgs#git nixpkgs#jq --command bash
+#!/usr/bin/env -S nix shell nixpkgs#bash --command bash
 
 set -o errexit -o nounset -o pipefail
 
-if ! command -v jq &>/dev/null; then
-  echo "Error: jq is not installed. Re-running the script with the correct shebang."
-  exec /usr/bin/env -S nix shell nixpkgs#bash nixpkgs#curl nixpkgs#git nixpkgs#jq --command bash "$0" "$@"
-fi
+commands=("git" "jq")
+for cmd in "${commands[@]}"; do
+  command -v "$cmd" &>/dev/null || {
+    echo "Error: $cmd is not installed."
+    exec /usr/bin/env -S nix shell nixpkgs#bash nixpkgs#curl nixpkgs#git nixpkgs#jq --command bash "$0" "$@"
+  }
+done
 
 LOCAL_LIBRARY_PATH="$(dirname "$(realpath "$BASH_SOURCE")")/library.sh"
 REMOTE_LIBRARY_URL="https://go.wolfyta.dev/yukino/library.sh"
