@@ -171,7 +171,7 @@ echo "Host: $HOST"
 echo "GitHub Login: ${username:-Not provided}"
 echo "ZFS Root: ${ZFS_ROOT:-Not using ZFS}"
 [[ -n "${SNAPSHOT_PATH:-}" ]] && echo "Persist Snapshot: $SNAPSHOT_PATH" || echo "Persist Snapshot: Not used"
-echo "Safe Mode: $(is_in_safe_mode && echo "Enabled" || echo "Disabled")"
+echo "Safe Mode: $(is_in_safe_mode && echo "${GREEN}Enabled${RESET}" || echo "${RED}Disabled${RESET}")"
 echo
 
 prompt_yes_no "Are these details correct?" || {
