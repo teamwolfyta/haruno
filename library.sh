@@ -1,4 +1,4 @@
-set -euo pipefail
+set -o errexit -o nounset -o pipefail
 
 SAFE_MODE=0
 YUKINO_HOSTS=("angela" "regina")
