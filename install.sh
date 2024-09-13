@@ -170,8 +170,8 @@ echo "Info: Starting NixOS installation..."
 echo
 if is_in_safe_mode; then
   echo "Info: Safe mode enabled. No actions will be executed."
-  echo "Would run: NIX_CONFIG=\"$NIX_CONFIG\" sudo nixos-install --no-root-password --flake \"$REPOSITORY/$GIT_REF#$HOST\""
+  echo "Would run: NIX_CONFIG=\"$NIX_CONFIG\" sudo nixos-install --no-root-password --option tarball-ttl 0 --flake \"$REPOSITORY/$GIT_REF#$HOST\""
 else
-  NIX_CONFIG="$NIX_CONFIG" sudo nixos-install --no-root-password --flake "$REPOSITORY/$GIT_REF#$HOST"
+  NIX_CONFIG="$NIX_CONFIG" sudo nixos-install --no-root-password --option tarball-ttl 0 --flake "$REPOSITORY/$GIT_REF#$HOST"
 fi
 echo
