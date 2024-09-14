@@ -119,7 +119,7 @@ prompt_for_access_token() {
     error_message=$(echo "$response" | jq -r '.error // empty')
     if [[ "$error_message" == "slow_down" ]]; then
       echo "Warning: Rate limit exceeded. Waiting for a while before retrying..." >&2
-      sleep $((interval * 2)) # Increase wait time before retrying
+      sleep $((interval * 2))
       continue
     elif [[ "$error_message" != "authorization_pending" ]]; then
       echo "Error: $error_message" >&2

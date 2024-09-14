@@ -4,10 +4,7 @@ set -o errexit -o nounset -o pipefail
 
 commands=("git" "jq")
 for cmd in "${commands[@]}"; do
-  command -v "$cmd" &>/dev/null || {
-    echo "Error: $cmd is not installed."
-    exec /usr/bin/env -S nix --extra-experimental-features "nix-command flakes" shell nixpkgs#bash nixpkgs#curl nixpkgs#git nixpkgs#jq --command bash "$0" "$@"
-  }
+  command -v "$cmd" &>/dev/null || exec /usr/bin/env -S nix --extra-experimental-features "nix-command flakes" shell nixpkgs#bash nixpkgs#curl nixpkgs#git nixpkgs#jq --command bash "$0" "$@"
 done
 
 LOCAL_LIBRARY_PATH="$(dirname "$(realpath "$BASH_SOURCE")")/library.sh"
@@ -134,12 +131,12 @@ print_banner
 print_separator
 echo
 
-NIX_CONFIG=""
+NIX_ACCESS_TOKENS=""
 
 if prompt_for_yes_or_no "Would you like to login via GitHub?"; then
   echo
   read -r username access_token < <(prompt_for_access_token)
-  NIX_CONFIG="extra-access-tokens = github.com=$access_token"
+  NIX_ACCESS_TOKENS="github.com=$access_token"
   echo "Info: Logged in as GitHub user: $username"
 fi
 echo
@@ -170,8 +167,8 @@ echo "Info: Starting NixOS installation..."
 echo
 if is_in_safe_mode; then
   echo "Info: Safe mode enabled. No actions will be executed."
-  echo "Would run: NIX_CONFIG=\"$NIX_CONFIG\" sudo nixos-install --no-root-password --option tarball-ttl 0 --flake \"$REPOSITORY/$GIT_REF#$HOST\""
+  echo "Would run: sudo nixos-install --no-root-password --option access-tokens \"$NIX_ACCESS_TOKENS\" --option tarball-ttl \"0\" --flake \"$REPOSITORY/$GIT_REF#$HOST\""
 else
-  NIX_CONFIG="$NIX_CONFIG" sudo nixos-install --no-root-password --option tarball-ttl 0 --flake "$REPOSITORY/$GIT_REF#$HOST"
+  sudo nixos-install --no-root-password --option access-tokens "$NIX_ACCESS_TOKENS" --option tarball-ttl "0" --flake "$REPOSITORY/$GIT_REF#$HOST"
 fi
 echo
