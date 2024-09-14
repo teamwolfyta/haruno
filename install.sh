@@ -100,9 +100,8 @@ else
   echo "Info: Setting up filesystems and swap space..."
   sudo mkswap "$SWAPDISK" -L "NIXSWAP"
   sudo swapon "$SWAPDISK"
-  sudo mkfs.fat -F 32 "$BOOTDISK" -n NIXBOOT
 
-  sudo mount --mkdir "$BOOTDISK" /mnt/boot
+  sudo mkfs.fat -F 32 "$BOOTDISK" -n NIXBOOT
 
   echo "Info: Creating ZFS pool and datasets..."
   sudo zpool create -f -o ashift=12 -o autotrim=on -O compression=zstd -O acltype=posixacl -O atime=off -O xattr=sa -O normalization=formD -O mountpoint=none zroot "$ZFSDISK"
@@ -110,6 +109,8 @@ else
   sudo zfs create -o mountpoint=legacy zroot/root
   sudo zfs snapshot zroot/root@blank
   sudo mount -t zfs zroot/root /mnt
+
+  sudo mount --mkdir "$BOOTDISK" /mnt/boot
 
   for dataset in nix tmp cache; do
     sudo zfs create -o mountpoint=legacy "zroot/$dataset"
