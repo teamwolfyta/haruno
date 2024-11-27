@@ -1,49 +1,52 @@
 {
+  description = ''
+    $$\     $$\          $$\       $$\
+    \$$\   $$  |         $$ |      \__|
+     \$$\ $$  /$$\   $$\ $$ |  $$\ $$\ $$$$$$$\   $$$$$$\
+      \$$$$  / $$ |  $$ |$$ | $$  |$$ |$$  __$$\ $$  __$$\
+       \$$  /  $$ |  $$ |$$$$$$  / $$ |$$ |  $$ |$$ /  $$ |
+        $$ |   $$ |  $$ |$$  _$$<  $$ |$$ |  $$ |$$ |  $$ |
+        $$ |   \$$$$$$  |$$ | \$$\ $$ |$$ |  $$ |\$$$$$$  |
+        \__|    \______/ \__|  \__|\__|\__|  \__| \______/
+
+    ❄️ Yukino (雪乃), The Nix(OS) Flake that powers my system(s).
+  '';
+
   inputs = {
-    devenv.url = "github:cachix/devenv";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    devenv = {
+      url = "github:cachix/devenv";
+    };
+
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
+
+    snowfall-lib = {
+      url = "github:snowfallorg/lib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    {
-      nixpkgs,
-      devenv,
-      ...
-    }@inputs:
+    inputs:
     let
-      forEachSystem =
-        function:
-        nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: function nixpkgs.legacyPackages.${system});
+      src = ./.;
+      namespace = "yukino";
     in
-    {
-      devShells = forEachSystem (pkgs: {
-        default = devenv.lib.mkShell {
-          inherit inputs pkgs;
-          modules = [
-            (_: {
-              languages = {
-                nix.enable = true;
-                shell.enable = true;
-              };
+    inputs.snowfall-lib.mkFlake {
+      inherit inputs src;
 
-              pre-commit.hooks = {
-                commitlint-rs = {
-                  enable = true;
-                  entry = "commitlint --edit";
-                  language = "rust";
-                  package = pkgs.commitlint-rs;
-                  pass_filenames = false;
-                  stages = [ "commit-msg" ];
-                };
-                deadnix.enable = true;
-                shellcheck.enable = true;
-                shfmt.enable = true;
-                statix.enable = true;
-                nixfmt-rfc-style.enable = true;
-              };
-            })
-          ];
-        };
-      });
+      snowfall = {
+        inherit namespace;
+      };
+
+      channels-config = {
+        allowUnfree = true;
+      };
+
+      outputs-builder = channels: {
+        devShells.default = import ./shell.nix { inherit inputs channels; };
+        formatter = channels.nixpkgs.nixfmt-rfc-style;
+      };
     };
 }
