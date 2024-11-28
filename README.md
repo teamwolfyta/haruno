@@ -1,6 +1,6 @@
 # Yukino
 
-> TODO.
+> ❄️ Yukino (雪乃), The Nix(OS) Flake that powers my system(s).
 
 ## Scripts - Install
 
