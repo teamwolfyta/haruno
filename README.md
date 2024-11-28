@@ -42,3 +42,5 @@ nix flake init --template github:TeamWolfyta/Yukino-Public#rust
 ```shell
 nix flake init --template github:TeamWolfyta/Yukino-Public#typescript
 ```
+
+[⬆️ Back to top](#yukino)
