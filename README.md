@@ -7,3 +7,38 @@
 ```shell
 sh <(curl -L https://go.wolfyta.dev/yukino/install.sh)
 ```
+
+## Templates
+
+- Commitlint-rs
+- Deadnix
+- EditorConfig
+- Nix
+- Nixfmt-rfc-style
+- Statix
+
+### Rust
+
+- Clippy
+- Rust
+- Rustfmt
+
+#### Rust - Install
+
+```shell
+nix flake init --template github:TeamWolfyta/Yukino-Public#rust
+```
+
+### TypeScript
+
+- BiomeJS
+- Bun
+- NPN
+- PNPM
+- TypeScript
+
+#### TypeScript - Install
+
+```shell
+nix flake init --template github:TeamWolfyta/Yukino-Public#typescript
+```
