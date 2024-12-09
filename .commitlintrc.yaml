@@ -9,7 +9,7 @@ rules:
     options:
       - flake
       - flake/templates
-      - flake/templates/typescript
+      - flake/templates/typescript-bun
       - flake/templates/rust
       - scripts
       - scripts/install

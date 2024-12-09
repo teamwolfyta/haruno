@@ -29,7 +29,7 @@ sh <(curl -L https://go.wolfyta.dev/yukino/install.sh)
 nix flake init --template github:TeamWolfyta/Yukino-Public#rust
 ```
 
-### TypeScript
+### TypeScript-Bun
 
 - BiomeJS
 - Bun
@@ -37,10 +37,10 @@ nix flake init --template github:TeamWolfyta/Yukino-Public#rust
 - PNPM
 - TypeScript
 
-#### TypeScript - Install
+#### TypeScript-Bun - Install
 
 ```shell
-nix flake init --template github:TeamWolfyta/Yukino-Public#typescript
+nix flake init --template github:TeamWolfyta/Yukino-Public#typeScript-bun
 ```
 
 [⬆️ Back to top](#yukino)
