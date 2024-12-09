@@ -43,4 +43,16 @@ nix flake init --template github:TeamWolfyta/Yukino-Public#rust
 nix flake init --template github:TeamWolfyta/Yukino-Public#typeScript-bun
 ```
 
+### TypeScript-Deno
+
+- BiomeJS
+- Deno
+- TypeScript
+
+#### TypeScript-Deno - Install
+
+```shell
+nix flake init --template github:TeamWolfyta/Yukino-Public#typeScript-deno
+```
+
 [⬆️ Back to top](#yukino)

@@ -10,5 +10,8 @@
 ### Devenv ###
 .devenv
 
+### Flake ###
+templates/**/flake.lock
+
 ### Pre-commit ###
 .pre-commit-config.yaml

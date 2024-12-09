@@ -7,14 +7,8 @@ rules:
   scope:
     optional: true
     options:
+      - deno
       - flake
-      - flake/templates
-      - flake/templates/rust
-      - flake/templates/typescript-bun
-      - flake/templates/typescript-deno
-      - scripts
-      - scripts/install
-      - scripts/library
   type:
     level: error
     options:
