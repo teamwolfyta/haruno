@@ -2,13 +2,13 @@
   "devDependencies": {
     "@types/bun": "^1.1"
   },
-  "module": "src/index.ts",
+  "module": "src/main.ts",
   "name": "typescript-bun",
   "peerDependencies": {
     "typescript": "^5"
   },
   "scripts": {
-    "start": "bun start src/index.ts",
+    "start": "bun start src/main.ts",
     "watch": "bun --watch run start"
   },
   "type": "module"

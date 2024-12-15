@@ -1,7 +1,7 @@
 {
   "nodeModulesDir": "auto",
   "tasks": {
-    "start": "deno run src/index.ts",
-    "watch": "deno run --watch src/index.ts"
+    "start": "deno run src/main.ts",
+    "watch": "deno run --watch src/main.ts"
   }
 }
