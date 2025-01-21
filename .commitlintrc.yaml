@@ -15,6 +15,7 @@ rules:
       - scripts
       - scripts/install
       - scripts/library
+      - scripts/switch
   type:
     level: error
     options:

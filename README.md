@@ -5,11 +5,22 @@
 > [!IMPORTANT]
 > Most links on this page direct to the [External Links](#external-links) section. If you're interested in a specific technology, click its link to navigate to the external links list, where you'll find direct links to official websites, documentation, or GitHub repositories.
 
-## Scripts - Install
+## Scripts
+
+### Install
 
 ```shell
 sh <(curl -L https://go.wolfyta.dev/yukino/install.sh)
 ```
+
+### Switch
+
+```shell
+sh <(curl -L https://go.wolfyta.dev/yukino/switch.sh)
+```
+
+> [!WARNING]
+> This script is primarily designed for WSL (Windows Subsystem for Linux) environments. For non-WSL environments, I recommended to use the [nh](#external-links) package.
 
 ## Templates
 
@@ -69,6 +80,7 @@ nix flake init --template github:TeamWolfyta/Yukino-Public#typeScript-deno
 - `Deadnix`: [github](https://github.com/astro/deadnix)
 - `Deno`: [deno.com](https://deno.com)
 - `EditorConfig`: [editorconfig.org](https://editorconfig.org)
+- `nh`: [github](https://github.com/viperML/nh)
 - `NPN`: [npmjs.com](https://www.npmjs.com)
 - `Nix`: [nixos.org](https://nixos.org)
 - `Nixfmt-rfc-style`: [github](https://github.com/NixOS/nixfmt)
