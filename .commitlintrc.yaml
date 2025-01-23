@@ -1,35 +1,30 @@
 rules:
   description-format:
     level: error
-    format: ^[A-Z].*$ # Description must start with a capital letter
+    format: ^[A-Z].*$ # Must start with a capital letter
   footers-empty:
     level: ignore
   scope:
     optional: true
     options:
+      - config
       - flake
       - flake/templates
-      - flake/templates/rust
-      - flake/templates/typescript-bun
-      - flake/templates/typescript-deno
       - scripts
-      - scripts/install
-      - scripts/library
-      - scripts/switch
   type:
     level: error
     options:
-      - build # Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
-      - chore # Other changes that don't modify src or test files
-      - ci # Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
-      - docs # Documentation only changes
-      - feat # A new feature
-      - fix # A bug fix
-      - perf # A code change that improves performance
-      - refactor # A code change that neither fixes a bug nor adds a feature
-      - revert # Reverts a previous commit
-      - style # Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-      - test # Adding missing tests or correcting existing tests
+      - build # Build system or dependency changes
+      - chore # Other non-src/test changes
+      - ci # CI configuration changes
+      - docs # Documentation changes
+      - feat # New feature
+      - fix # Bug fix
+      - perf # Performance improvement
+      - refactor # Code change (no bug fix/feature)
+      - revert # Revert previous commit
+      - style # Non-functional code changes
+      - test # Test addition or correction
   type-format:
     level: error
-    format: ^[a-z].*$ # Type must start with a lowercase letter
+    format: ^[a-z].*$ # Must start with lowercase letter
