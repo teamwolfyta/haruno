@@ -30,19 +30,15 @@ inputs.devenv.lib.mkShell {
 
       scripts = {
         "update-flake-lock".exec = ''
-          nix flake update
+          echo "✔️ Updating Nix flake..."
+          nix flake update || { echo "❌ Failed to update Nix flake" >&2; exit 1; }
 
-          if git diff --quiet flake.lock; then
-              echo "No changes to flake.lock"
-          else
-              # Stage flake.lock changes
-              git add flake.lock
+          git diff --quiet flake.lock && { echo "✔️ No changes to flake.lock"; exit 0; }
 
-              # Commit the changes
-              git commit -m "chore(flake): Update flake lock"
+          (git add flake.lock && git commit -m "chore(flake): Update flake lock") || \
+            { echo "❌ Failed to update flake.lock" >&2; exit 1; }
 
-              echo "flake.lock has been updated and committed."
-          fi
+          echo "✔️ flake.lock has been updated and committed"
         '';
       };
     })
