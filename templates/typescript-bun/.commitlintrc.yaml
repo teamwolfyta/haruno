@@ -7,7 +7,7 @@ rules:
   scope:
     optional: true
     options:
-      - npm
+      - bun
       - flake
   type:
     level: error
