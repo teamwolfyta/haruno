@@ -7,13 +7,13 @@
 
 ## Scripts
 
-### Install
+### Scripts - Install
 
 ```shell
 sh <(curl -L https://go.wolfyta.dev/yukino/install.sh)
 ```
 
-### Switch
+### Scripts - Switch
 
 ```shell
 sh <(curl -L https://go.wolfyta.dev/yukino/switch.sh)
