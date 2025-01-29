@@ -2,9 +2,6 @@
 
 > ❄️ Yukino (雪乃), The Nix(OS) Flake that powers my system(s).
 
-> [!IMPORTANT]
-> Most links on this page direct to the [External Links](#external-links) section. If you're interested in a specific technology, click its link to navigate to the external links list, where you'll find direct links to official websites, documentation, or GitHub repositories.
-
 > [!NOTE]
 > For repository discussions, feedback, or support, you can find me in the [Vimjoyer](https://www.youtube.com/@vimjoyer) community [Discord Server](https://discord.gg/sguvvWsa6D). Feel free to ping or message me (@wolfyta).
 
@@ -23,25 +20,25 @@ sh <(curl -L https://go.wolfyta.dev/yukino/switch.sh)
 ```
 
 > [!WARNING]
-> This script is primarily designed for WSL (Windows Subsystem for Linux) environments. For non-WSL environments, I recommended to use the [nh](#external-links) package.
+> This script is primarily designed for WSL (Windows Subsystem for Linux) environments. For non-WSL environments, I recommended to use the [nh](https://github.com/viperML/nh) package.
 
 ## Templates
 
 All templates come with the following technologies enabled and configured by default:
 
-- [Commitlint-rs](#external-links)
-- [Deadnix](#external-links)
-- [EditorConfig](#external-links)
-- [Nix](#external-links)
-- [Nixfmt-rfc-style](#external-links)
-- [Statix](#external-links)
+- [Commitlint-rs](https://github.com/KeisukeYamashita/commitlint-rs)
+- [Deadnix](https://github.com/astro/deadnix)
+- [EditorConfig](https://github.com/editorconfig/editorconfig)
+- [Nix](https://github.com/NixOS/nixpkgs)
+- [Nixfmt-rfc-style](https://github.com/NixOS/nixfmt)
+- [Statix](https://github.com/oppiliappan/statix)
 
 ### Python-UV
 
-- [Hatchling](#external-links)
-- [Pyright](#external-links)
-- [Ruff](#external-links)
-- [UV](#external-links)
+- [Hatchling](https://github.com/pypa/hatch)
+- [Pyright](https://github.com/microsoft/pyright)
+- [Ruff](https://github.com/astral-sh/ruff)
+- [UV](https://github.com/astral-sh/uv)
 
 #### Python-UV - Install
 
@@ -52,9 +49,9 @@ nix flake init --template github:TeamWolfyta/Yukino-Public#python-uv
 
 ### Rust
 
-- [Clippy](#external-links)
-- [Rust](#external-links)
-- [Rustfmt](#external-links)
+- [Clippy](https://github.com/rust-lang/rust-clippy)
+- [Rust](https://github.com/rust-lang/rust)
+- [Rustfmt](https://github.com/rust-lang/rustfmt)
 
 #### Rust - Install
 
@@ -64,11 +61,11 @@ nix flake init --template github:TeamWolfyta/Yukino-Public#rust
 
 ### TypeScript-Bun
 
-- [BiomeJS](#external-links)
-- [Bun](#external-links)
-- [NPN](#external-links)
-- [PNPM](#external-links)
-- [TypeScript](#external-links)
+- [BiomeJS](https://github.com/biomejs/biome)
+- [Bun](https://github.com/oven-sh/bun)
+- [NPN](https://github.com/npm)
+- [PNPM](https://github.com/pnpm/pnpm)
+- [TypeScript](https://github.com/microsoft/TypeScript)
 
 #### TypeScript-Bun - Install
 
@@ -78,38 +75,15 @@ nix flake init --template github:TeamWolfyta/Yukino-Public#typeScript-bun
 
 ### TypeScript-Deno
 
-- [BiomeJS](#external-links)
-- [Deno](#external-links)
-- [TypeScript](#external-links)
+- [BiomeJS](https://github.com/biomejs/biome)
+- [Deno](https://github.com/denoland/deno)
+- [TypeScript](https://github.com/microsoft/TypeScript)
 
 #### TypeScript-Deno - Install
 
 ```shell
 nix flake init --template github:TeamWolfyta/Yukino-Public#typeScript-deno
 ```
-
-## External Links
-
-- `BiomeJS`: [biomejs.dev](https://biomejs.dev)
-- `Bun`: [bun.sh](https://bun.sh)
-- `Clippy`: [github.com](https://github.com/rust-lang/rust-clippy)
-- `Commitlint-rs`: [github.com](https://github.com/keisukeyamashita/commitlint-rs)
-- `Deadnix`: [github.com](https://github.com/astro/deadnix)
-- `Deno`: [deno.com](https://deno.com)
-- `EditorConfig`: [editorconfig.org](https://editorconfig.org)
-- `Hatchling`: [github.com](https://github.com/pypa/hatch)
-- `Nh`: [github.com](https://github.com/viperML/nh)
-- `NPN`: [npmjs.com](https://www.npmjs.com)
-- `Nix`: [nixos.org](https://nixos.org)
-- `Nixfmt-rfc-style`: [github.com](https://github.com/NixOS/nixfmt)
-- `PNPM`: [pnpm.io](https://pnpm.io/)
-- `Pyright`: [github.com](https://github.com/microsoft/pyright)
-- `Ruff`: [github.com](https://github.com/astral-sh/ruff)
-- `Rust`: [rust-lang.org](https://www.rust-lang.org)
-- `Rustfmt`: [github.com](https://github.com/rust-lang/rustfmt)
-- `Statix`: [github.com](https://github.com/oppiliappan/statix)
-- `TypeScript`: [typescriptlang.org](https://www.typescriptlang.org/)
-- `UV`: [github.com](https://github.com/astral-sh/uv)
 
 <div align="middle" >
   <p>
