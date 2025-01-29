@@ -59,27 +59,30 @@ nix flake init --template github:TeamWolfyta/Yukino-Public#python-uv
 nix flake init --template github:TeamWolfyta/Yukino-Public#rust
 ```
 
-### TypeScript-Bun
+### TypeScript
+
+All TypeScript templates come with the following technologies enabled and configured by default:
 
 - [BiomeJS](https://github.com/biomejs/biome)
+- [TypeScript](https://github.com/microsoft/TypeScript)
+
+#### TypeScript-Bun
+
 - [Bun](https://github.com/oven-sh/bun)
 - [NPN](https://github.com/npm)
 - [PNPM](https://github.com/pnpm/pnpm)
-- [TypeScript](https://github.com/microsoft/TypeScript)
 
-#### TypeScript-Bun - Install
+##### TypeScript-Bun - Install
 
 ```shell
 nix flake init --template github:TeamWolfyta/Yukino-Public#typeScript-bun
 ```
 
-### TypeScript-Deno
+#### TypeScript-Deno
 
-- [BiomeJS](https://github.com/biomejs/biome)
 - [Deno](https://github.com/denoland/deno)
-- [TypeScript](https://github.com/microsoft/TypeScript)
 
-#### TypeScript-Deno - Install
+##### TypeScript-Deno - Install
 
 ```shell
 nix flake init --template github:TeamWolfyta/Yukino-Public#typeScript-deno
