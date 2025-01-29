@@ -33,6 +33,20 @@ All templates come with the following technologies enabled and configured by def
 - [Nixfmt-rfc-style](#external-links)
 - [Statix](#external-links)
 
+### Python-UV
+
+- [Hatchling](#external-links)
+- [Pyright](#external-links)
+- [Ruff](#external-links)
+- [UV](#external-links)
+
+#### Python-UV - Install
+
+```shell
+
+nix flake init --template github:TeamWolfyta/Yukino-Public#python-uv
+```
+
 ### Rust
 
 - [Clippy](#external-links)
@@ -80,15 +94,19 @@ nix flake init --template github:TeamWolfyta/Yukino-Public#typeScript-deno
 - `Deadnix`: [github](https://github.com/astro/deadnix)
 - `Deno`: [deno.com](https://deno.com)
 - `EditorConfig`: [editorconfig.org](https://editorconfig.org)
-- `nh`: [github](https://github.com/viperML/nh)
+- `Hatchling`: [github](https://github.com/pypa/hatch)
+- `Nh`: [github](https://github.com/viperML/nh)
 - `NPN`: [npmjs.com](https://www.npmjs.com)
 - `Nix`: [nixos.org](https://nixos.org)
 - `Nixfmt-rfc-style`: [github](https://github.com/NixOS/nixfmt)
 - `PNPM`: [pnpm.io](https://pnpm.io/)
+- `Pyright`: [github](https://github.com/microsoft/pyright)
+- `Ruff`: [github](https://github.com/astral-sh/ruff)
 - `Rust`: [rust-lang.org](https://www.rust-lang.org)
 - `Rustfmt`: [github](https://github.com/rust-lang/rustfmt)
 - `Statix`: [github](https://github.com/oppiliappan/statix)
 - `TypeScript`: [typescriptlang.org](https://www.typescriptlang.org/)
+- `UV`: [github](https://github.com/astral-sh/uv)
 
 <div align="middle" >
   <p>

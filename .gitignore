@@ -15,3 +15,6 @@ templates/**/flake.lock
 
 ### Pre-commit ###
 .pre-commit-config.yaml
+
+### UV ###
+templates/**/uv.lock
