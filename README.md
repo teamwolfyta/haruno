@@ -5,6 +5,9 @@
 > [!IMPORTANT]
 > Most links on this page direct to the [External Links](#external-links) section. If you're interested in a specific technology, click its link to navigate to the external links list, where you'll find direct links to official websites, documentation, or GitHub repositories.
 
+> [!NOTE]
+> For repository discussions, feedback, or support, you can find me in the [Vimjoyer](https://www.youtube.com/@vimjoyer) community [Discord Server](https://discord.gg/sguvvWsa6D). Feel free to ping or message me (@wolfyta).
+
 ## Scripts
 
 ### Scripts - Install
