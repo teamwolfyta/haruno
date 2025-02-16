@@ -32,7 +32,7 @@
               pre-commit.hooks = {
                 commitlint-rs = {
                   enable = true;
-                  entry = "commitlint --edit";
+                  entry = "commitlint --edit .git/COMMIT_EDITMSG";
                   language = "rust";
                   package = pkgs.commitlint-rs;
                   pass_filenames = false;
