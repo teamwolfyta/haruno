@@ -56,7 +56,7 @@ All templates come with the following technologies enabled and configured by def
 
 ```shell
 
-nix flake init --template github:TeamWolfyta/Yukino-Public#python-uv
+nix flake init --template "github:TeamWolfyta/Yukino-Public#python-uv"
 ```
 
 ### Rust
@@ -68,7 +68,7 @@ nix flake init --template github:TeamWolfyta/Yukino-Public#python-uv
 #### Rust - Install
 
 ```shell
-nix flake init --template github:TeamWolfyta/Yukino-Public#rust
+nix flake init --template "github:TeamWolfyta/Yukino-Public#rust"
 ```
 
 ### TypeScript
@@ -93,7 +93,7 @@ All TypeScript templates come with the following technologies enabled and config
 ##### TypeScript-Bun - Install
 
 ```shell
-nix flake init --template github:TeamWolfyta/Yukino-Public#typeScript-bun
+nix flake init --template "github:TeamWolfyta/Yukino-Public#typescript-bun"
 ```
 
 #### TypeScript-Deno
@@ -103,7 +103,7 @@ nix flake init --template github:TeamWolfyta/Yukino-Public#typeScript-bun
 ##### TypeScript-Deno - Install
 
 ```shell
-nix flake init --template github:TeamWolfyta/Yukino-Public#typeScript-deno
+nix flake init --template "github:TeamWolfyta/Yukino-Public#typescript-deno"
 ```
 
 <div align="middle" >
