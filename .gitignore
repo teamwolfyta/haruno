@@ -1,20 +1,10 @@
-# Created by https://www.toptal.com/developers/gitignore/api/direnv
-# Edit at https://www.toptal.com/developers/gitignore?templates=direnv
-
-### direnv ###
+### Direnv ###
 .direnv
-# .envrc
-
-# End of https://www.toptal.com/developers/gitignore/api/direnv
 
 ### Devenv ###
 .devenv
-
-### Flake ###
-templates/**/flake.lock
-
-### Pre-commit ###
 .pre-commit-config.yaml
 
-### UV ###
-templates/**/uv.lock
+### Templates ###
+flake/templates/**/flake.lock
+flake/templates/**/uv.lock
