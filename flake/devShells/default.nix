@@ -1,12 +1,9 @@
-{ inputs, channels }:
-let
-  pkgs = channels.nixpkgs;
-in
+{ inputs, pkgs, ... }:
 inputs.devenv.lib.mkShell {
   inherit inputs pkgs;
 
   modules = [
-    (_: {
+    {
       languages = {
         nix.enable = true;
         shell.enable = true;
@@ -41,6 +38,6 @@ inputs.devenv.lib.mkShell {
           echo "✔️ flake.lock has been updated and committed"
         '';
       };
-    })
+    }
   ];
 }
