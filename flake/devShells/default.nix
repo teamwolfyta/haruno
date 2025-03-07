@@ -19,6 +19,7 @@ inputs.devenv.lib.mkShell {
           stages = [ "commit-msg" ];
         };
         deadnix.enable = true;
+        flake-checker.enable = true;
         shellcheck.enable = true;
         shfmt.enable = true;
         statix.enable = true;
