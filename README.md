@@ -3,7 +3,7 @@
 > ❄️ Yukino (雪乃), The Nix(OS) Flake that powers my system(s).
 
 > [!NOTE]
-> For repository discussions, feedback, or support, find me in the [Vimjoyer](https://www.youtube.com/@vimjoyer) community [Discord Server](https://discord.gg/sguvvWsa6D). Ping or message @wolfyta.
+> For repository discussions, feedback, or support, find me in the [Vimjoyer](https://github.com/vimjoyer/) community [Discord Server](https://discord.gg/sguvvWsa6D). Ping or message @wolfyta.
 
 ## Contents
 
