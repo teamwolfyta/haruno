@@ -12,6 +12,15 @@
     ❄️ Yukino (雪乃), The Nix(OS) Flake that powers my system(s).
   '';
 
+  outputs =
+    { conflake, systems, ... }@inputs:
+    conflake ./. {
+      inherit inputs systems;
+      nixDir.src = ./flake;
+
+      presets.enable = false;
+    };
+
   inputs = {
     devenv = {
       url = "github:cachix/devenv";
@@ -30,13 +39,4 @@
       url = "github:nix-systems/x86_64-linux";
     };
   };
-
-  outputs =
-    { conflake, systems, ... }@inputs:
-    conflake ./. {
-      inherit inputs systems;
-      nixDir.src = ./flake;
-
-      presets.enable = false;
-    };
 }
