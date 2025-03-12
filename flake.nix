@@ -37,8 +37,6 @@
       inherit inputs systems;
       nixDir.src = ./flake;
 
-      perSystem = pkgs: {
-        formatter = pkgs.nixpkgs.nixfmt-rfc-style;
-      };
+      presets.enable = false;
     };
 }
