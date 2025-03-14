@@ -1,0 +1,5 @@
+### Direnv ###
+.direnv
+
+### Pre-Commit ###
+.pre-commit-config.yaml
