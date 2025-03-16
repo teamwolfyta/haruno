@@ -13,9 +13,6 @@ rules:
     options:
       - checks
       - devshells
-      - templates
-      - templates.flake
-      - repl
   type:
     level: error
     options:
