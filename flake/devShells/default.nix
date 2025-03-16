@@ -5,7 +5,7 @@ in
 pkgs.mkShell {
   inherit (defaultChecks) shellHook;
 
-  buildInputs =
+  nativeBuildInputs =
     defaultChecks.enabledPackages
     ++ (with pkgs; [
       nil
