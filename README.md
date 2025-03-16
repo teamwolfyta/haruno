@@ -2,7 +2,6 @@
 
 <a href="https://www.pixiv.net/en/artworks/125175130">
   <picture>
-    <!-- Image corner curve is 30% -->
     <img align="right" alt="Haruno (by ライト)" src="https://teamwolfyta.github.io/assets/haruno/rounded_compressed.png" width="40%" >
   </picture>
 </a>
