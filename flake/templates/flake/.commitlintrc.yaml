@@ -16,7 +16,7 @@ rules:
   type:
     level: error
     options:
-      - build # Changes to build system, dependencies, or infrastructu
+      - build # Changes to build system, dependencies, or infrastructure
       - chore # Routine maintenance tasks, version bumps, or housekeep
       - ci # CI/CD pipeline and workflow configuration changes
       - docs # Documentation updates or additions (no code changes)
