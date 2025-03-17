@@ -16,6 +16,8 @@ rules:
       - templates
       - templates.flake
       - repl
+
+      - commitlint
   type:
     options:
       - build # Changes to build system, dependencies, or infrastructure

@@ -13,6 +13,8 @@ rules:
     options:
       - checks
       - devshells
+
+      - commitlint
   type:
     options:
       - build # Changes to build system, dependencies, or infrastructure
