@@ -17,7 +17,6 @@ rules:
       - templates.flake
       - repl
   type:
-    level: error
     options:
       - build # Changes to build system, dependencies, or infrastructure
       - chore # Routine maintenance tasks, version bumps, or housekeep
