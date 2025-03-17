@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://github.com/KeisukeYamashita/commitlint-rs/releases/download/v0.2.2/schema.json
 rules:
   description-format:
-    format: ^[a-z] # Lowercase only
+    format: ^[a-z]
     level: error
   description-max-length:
     length: 72
@@ -20,14 +20,14 @@ rules:
       - commitlint
   type:
     options:
-      - build # Changes to build system, dependencies, or infrastructure
-      - chore # Routine maintenance tasks, version bumps, or housekeep
-      - ci # CI/CD pipeline and workflow configuration changes
-      - docs # Documentation updates or additions (no code changes)
-      - feat # New features or significant enhancements for users
-      - fix # Bug fixes or error corrections that resolve user issues
-      - perf # Performance improvements or optimizations
-      - refactor # Code restructuring without behavior changes
-      - revert # Reverting previous changes to a stable state
-      - style # Code style/formatting changes (whitespace, semicolons)
-      - test # Adding/modifying tests without changing app code
+      - build
+      - chore
+      - ci
+      - docs
+      - feat
+      - fix
+      - perf
+      - refactor
+      - revert
+      - style
+      - test
