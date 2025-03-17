@@ -11,12 +11,15 @@ rules:
   scope:
     optional: true
     options:
+      # Flake
       - checks
       - devshells
       - templates
       - templates.flake
       - repl
-
+      # Languages
+      - nix
+      # Tooling
       - commitlint
   type:
     options:
