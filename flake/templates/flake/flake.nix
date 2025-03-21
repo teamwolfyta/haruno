@@ -1,30 +1,19 @@
 {
   outputs =
-    { conflake, systems, ... }@inputs:
-    conflake ./. {
-      inherit inputs systems;
-
-      nixDir.src = ./flake;
-      presets.enable = false;
+    { flake-parts, systems, ... }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ ./flake ];
+      systems = import systems;
     };
 
   inputs = {
-    conflake = {
-      url = "github:ratson/conflake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    systems.url = "github:nix-systems/default";
 
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
-    };
-
-    systems = {
-      url = "github:nix-systems/x86_64-linux";
     };
   };
 }
