@@ -1,19 +1,35 @@
 {
-  outputs =
-    { flake-parts, systems, ... }@inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ ./flake ];
-      systems = import systems;
+  inputs = {
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
     };
 
-  inputs = {
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    systems.url = "github:nix-systems/default";
+    flake-parts-builder = {
+      url = "github:tsandrini/flake-parts-builder";
+    };
 
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
+
+    systems = {
+      url = "github:nix-systems/default";
+    };
   };
+
+  outputs =
+    {
+      flake-parts,
+      flake-parts-builder,
+      ...
+    }@inputs:
+    let
+      inherit (flake-parts-builder.lib) loadParts;
+    in
+    flake-parts.lib.mkFlake { inherit inputs; } { imports = loadParts ./flake; };
 }
