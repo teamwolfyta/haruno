@@ -8,19 +8,6 @@ rules:
     level: error
   footers-empty:
     level: ignore
-  scope:
-    optional: true
-    options:
-      # Flake
-      - checks
-      - devshells
-      - templates
-      - templates.flake
-      - repl
-      # Languages
-      - nix
-      # Tooling
-      - commitlint
   type:
     options:
       - build
