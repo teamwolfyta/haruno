@@ -41,16 +41,15 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1742674229,
-        "narHash": "sha256-58kmwsu/q1YcIO0dUHcU8WRTJ7lLIdrEdXTFQ3HXqVU=",
-        "owner": "teamwolfyta",
+        "lastModified": 1742824341,
+        "narHash": "sha256-zUbYNeWMnblVvezOZGeQ0qTN52vXAKBET2DDLQTJ9Lo=",
+        "owner": "tsandrini",
         "repo": "flake-parts-builder",
-        "rev": "689785f82e50460948084e897a41d6a2ccd0b97d",
+        "rev": "598e10f4745096e248c0a4df4a22088798c0de8d",
         "type": "github"
       },
       "original": {
-        "owner": "teamwolfyta",
-        "ref": "fix-lib-typo",
+        "owner": "tsandrini",
         "repo": "flake-parts-builder",
         "type": "github"
       }
