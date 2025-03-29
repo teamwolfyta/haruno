@@ -8,6 +8,7 @@
     { pkgs, ... }:
     {
       pre-commit.settings.hooks = {
+        alejandra.enable = true;
         commitlint-rs = {
           enable = true;
           entry = "commitlint --edit .git/COMMIT_EDITMSG";
@@ -22,7 +23,6 @@
         editorconfig-checker.enable = true;
         flake-checker.enable = true;
         statix.enable = true;
-        nixfmt-rfc-style.enable = true;
       };
     };
 }
