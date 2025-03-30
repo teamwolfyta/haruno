@@ -1,13 +1,12 @@
-{ inputs, ... }:
-{
+{inputs, ...}: {
   imports = [
     inputs.git-hooks.flakeModule
   ];
 
-  perSystem =
-    { pkgs, ... }:
-    {
-      pre-commit.settings.hooks = {
+  perSystem = {pkgs, ...}: {
+    pre-commit.settings = {
+      excludes = ["LICENSE"];
+      hooks = {
         alejandra.enable = true;
         commitlint-rs = {
           enable = true;
@@ -16,7 +15,7 @@
           package = pkgs.commitlint-rs;
           pass_filenames = false;
           require_serial = true;
-          stages = [ "prepare-commit-msg" ];
+          stages = ["prepare-commit-msg"];
           verbose = true;
         };
         deadnix.enable = true;
@@ -25,4 +24,5 @@
         statix.enable = true;
       };
     };
+  };
 }
