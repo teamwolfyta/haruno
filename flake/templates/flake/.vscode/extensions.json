@@ -1,8 +1,0 @@
-{
-  "recommendations": [
-    "redhat.vscode-yaml",
-    "jnoortheen.nix-ide",
-    "mkhl.direnv",
-    "editorconfig.editorconfig"
-  ]
-}

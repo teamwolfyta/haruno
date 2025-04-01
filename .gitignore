@@ -3,6 +3,3 @@
 
 ### Pre-Commit ###
 .pre-commit-config.yaml
-
-### Templates ###
-flake/templates/**/*.lock
