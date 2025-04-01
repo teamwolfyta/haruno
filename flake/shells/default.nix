@@ -1,4 +1,4 @@
-_: {
+{lib, ...}: {
   perSystem = {
     config,
     pkgs,
@@ -7,7 +7,8 @@ _: {
     devShells = rec {
       default = development;
       development = pkgs.callPackage ./development.nix {
-        inherit (config) pre-commit;
+        inherit (config) pre-commit treefmt;
+        inherit lib;
       };
     };
   };

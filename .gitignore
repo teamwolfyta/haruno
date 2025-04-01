@@ -3,3 +3,6 @@
 
 ### Pre-Commit ###
 .pre-commit-config.yaml
+
+### Treefmt-Nix ###
+.treefmt.toml

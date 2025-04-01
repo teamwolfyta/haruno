@@ -20,27 +20,31 @@
     systems = {
       url = "github:nix-systems/default";
     };
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+    };
   };
 
   nixConfig = {
     extra-substituters = [
       "https://cache.nixos.org"
+      "https://numtide.cachix.org"
       "https://pre-commit-hooks.cachix.org/"
     ];
     extra-trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
       "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
     ];
   };
 
-  outputs =
-    {
-      flake-parts,
-      flake-parts-builder,
-      ...
-    }@inputs:
-    let
-      inherit (flake-parts-builder.lib) loadParts;
-    in
-    flake-parts.lib.mkFlake { inherit inputs; } { imports = loadParts ./flake; };
+  outputs = {
+    flake-parts,
+    flake-parts-builder,
+    ...
+  } @ inputs: let
+    inherit (flake-parts-builder.lib) loadParts;
+  in
+    flake-parts.lib.mkFlake {inherit inputs;} {imports = loadParts ./flake;};
 }
