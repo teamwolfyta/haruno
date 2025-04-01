@@ -1,9 +1,7 @@
 name: flake-checker
-
 concurrency:
   cancel-in-progress: true
   group: ${{ github.action }}-${{ github.ref }}
-
 jobs:
   flake-checker:
     runs-on: ubuntu-latest
@@ -12,7 +10,6 @@ jobs:
       - uses: DeterminateSystems/flake-checker-action@v9
         with:
           send-statistics: false
-
 on:
   schedule:
     - cron: "0 0 * * FRI"
