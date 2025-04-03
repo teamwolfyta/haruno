@@ -28,12 +28,10 @@
 
   nixConfig = {
     extra-substituters = [
-      "https://cache.nixos.org"
       "https://numtide.cachix.org"
       "https://pre-commit-hooks.cachix.org/"
     ];
     extra-trusted-public-keys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
       "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
     ];
