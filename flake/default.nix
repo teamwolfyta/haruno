@@ -1,7 +1,7 @@
-{inputs, ...}: {
+_: {
   imports = [
     ./partitions
   ];
 
-  systems = import inputs.systems;
+  systems = [];
 }
