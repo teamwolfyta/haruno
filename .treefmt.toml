@@ -7,7 +7,7 @@ on-unmatched = "warn"
 [formatter.actionlint]
 command = "actionlint"
 excludes = []
-includes = [".github/workflows/*.yml", ".github/workflows/*.yaml"]
+includes = [".github/workflows/*.yaml"]
 options = []
 
 [formatter.alejandra]
