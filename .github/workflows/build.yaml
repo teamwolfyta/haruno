@@ -1,6 +1,6 @@
 concurrency:
   cancel-in-progress: true
-  group: ${{ github.action }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
 env:
   CACHIX_CACHE_NAME: haruno
 jobs:
