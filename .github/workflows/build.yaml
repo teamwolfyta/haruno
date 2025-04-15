@@ -24,7 +24,7 @@ jobs:
         run: nix profile install nixpkgs#nix-fast-build
       - name: Build devShells
         run: nix-fast-build --skip-cached --no-nom --flake ".#devShells"
-name: build
+name: Build
 on:
   pull_request: {}
   push: {}
