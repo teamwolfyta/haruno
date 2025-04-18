@@ -7,15 +7,15 @@ pkgs.mkShell {
     deadnix
     editorconfig-checker
     jsonfmt
+    lefthook
     mdformat
     nil
-    pre-commit
     statix
     treefmt
     yamlfmt
   ];
 
   shellHook = ''
-    pre-commit install
+    lefthook install
   '';
 }

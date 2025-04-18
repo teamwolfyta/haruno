@@ -1,0 +1,13 @@
+assert_lefthook_installed = true
+
+[[pre-commit.jobs]]
+name = "actionlint"
+glob = ".github/workflows/*.yml"
+run = "actionlint {staged_files}"
+
+[[pre-commit.jobs]]
+name = "editorconfig-checker"
+run = "editorconfig-checker -exclude LICENSE"
+
+[[prepare-commit-msg.jobs]]
+run = "commitlint --edit ./.git/COMMIT_EDITMSG"
