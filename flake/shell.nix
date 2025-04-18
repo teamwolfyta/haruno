@@ -1,17 +1,22 @@
 {pkgs, ...}:
 pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
-    actionlint
-    alejandra
+    # Misc
     commitlint-rs
-    deadnix
     editorconfig-checker
     jsonfmt
     lefthook
     mdformat
+    treefmt
+
+    # Nix
+    alejandra
+    deadnix
     nil
     statix
-    treefmt
+
+    # Yaml
+    actionlint
     yamlfmt
   ];
 
