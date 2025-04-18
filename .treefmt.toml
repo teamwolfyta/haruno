@@ -19,6 +19,12 @@ excludes = []
 includes = ["*.md"]
 options = []
 
+[formatter.taplo]
+command = "taplo"
+excludes = []
+includes = ["*.toml"]
+options = ["format"]
+
 [formatter.yamlfmt]
 command = "yamlfmt"
 excludes = []

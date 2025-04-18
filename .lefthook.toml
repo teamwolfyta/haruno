@@ -19,6 +19,11 @@ name = "statix"
 run = "statix check --format errfmt"
 
 [[pre-commit.jobs]]
+name = "taplo"
+glob = "*.toml"
+run = "taplo lint {staged_files}"
+
+[[pre-commit.jobs]]
 name = "treefmt"
 run = "treefmt"
 stage_fixed = true

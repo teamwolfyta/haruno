@@ -8,6 +8,7 @@ pkgs.mkShell {
     lefthook
     mdformat
     treefmt
+    taplo
 
     # Nix
     alejandra
