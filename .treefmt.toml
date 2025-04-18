@@ -1,26 +1,11 @@
-excludes = [
-  "*.lock",
-  ".gitignore"
-]
+excludes = ["*.lock", ".gitignore"]
 on-unmatched = "warn"
 
-[formatter.actionlint]
-command = "actionlint"
-excludes = []
-includes = [".github/workflows/*.yaml"]
-options = []
-
-[formatter.alejandra]
+[formatter.alejandr]
 command = "alejandra"
 excludes = []
 includes = ["*.nix"]
 options = []
-
-[formatter.deadnix]
-command = "deadnix"
-excludes = []
-includes = ["*.nix"]
-options = ["--edit"]
 
 [formatter.jsonfmt]
 command = "jsonfmt"
@@ -33,21 +18,6 @@ command = "mdformat"
 excludes = []
 includes = ["*.md"]
 options = []
-
-[formatter.statix]
-command = "bash"
-excludes = []
-includes = ["*.nix"]
-options = [
-  "-euc",
-  """
-  # https://github.com/oppiliappan/statix/issues/69
-  for file in "$@"; do
-    statix fix "$file"
-  done
-  """,
-  "--",
-]
 
 [formatter.yamlfmt]
 command = "yamlfmt"

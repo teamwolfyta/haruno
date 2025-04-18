@@ -6,8 +6,18 @@ glob = ".github/workflows/*.yml"
 run = "actionlint {staged_files}"
 
 [[pre-commit.jobs]]
+name = "deadnix"
+glob = "*.nix"
+run = "deadnix --fail {staged_files}"
+
+[[pre-commit.jobs]]
 name = "editorconfig-checker"
 run = "editorconfig-checker -exclude LICENSE"
 
+[[pre-commit.jobs]]
+name = "statix"
+run = "statix check --format errfmt"
+
 [[prepare-commit-msg.jobs]]
+name = "commitlint-rs"
 run = "commitlint --edit ./.git/COMMIT_EDITMSG"
