@@ -18,6 +18,11 @@ run = "editorconfig-checker -exclude LICENSE"
 name = "statix"
 run = "statix check --format errfmt"
 
+[[pre-commit.jobs]]
+name = "treefmt"
+run = "treefmt"
+stage_fixed = true
+
 [[prepare-commit-msg.jobs]]
 name = "commitlint-rs"
 run = "commitlint --edit ./.git/COMMIT_EDITMSG"
